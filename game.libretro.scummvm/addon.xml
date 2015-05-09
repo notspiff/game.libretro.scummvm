@@ -13,19 +13,17 @@
                library_windx="game.libretro.scummvm.dll"
                library_wingl="game.libretro.scummvm.dll">
         <platforms></platforms>
-		<extensions></extensions>
-		<allowvfs>false</allowvfs>
-		<blockextract>false</blockextract>
+        <extensions></extensions>
+        <supports_vfs>false</supports_vfs>
     </extension>
     <extension point="xbmc.addon.metadata">
       <summary lang="en">ScummVM v1.6.0</summary>
       <description>ScummVM is a collection of game engine recreations. Originally designed to play LucasArts adventure games that use the SCUMM system, it now also supports a variety of non-SCUMM games by companies like Revolution Software and Adventure Soft.
 
-        Supported files: 
+Icon credit: HarryBana (harrybana.deviantart.com)
 
-        Icon credit: HarryBana (harrybana.deviantart.com)
-
-        Source: https://github.com/libretro/scummvm</description>
+License: GPLv2</description>
       <platform>all</platform>
+      <nofanart>true</nofanart>
     </extension>
 </addon>
