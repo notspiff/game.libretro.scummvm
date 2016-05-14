@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="game.libretro.scummvm"
-        name="ScummVM"
-	version="1.6.0"
-        provider-name="Libretro">
+<addon id="game.libretro.scummvm" name="ScummVM" version="1.8.0" provider-name="Libretro">
     <requires>
         <import addon="game.libretro" version="1.0.0"/>
     </requires>
