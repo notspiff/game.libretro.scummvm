@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="game.libretro.scummvm"
-        name="ScummVM"
-	version="1.6.0"
-        provider-name="Libretro">
+<addon id="game.libretro.scummvm" name="ScummVM" version="1.8.0" provider-name="Libretro">
     <requires>
         <import addon="game.libretro" version="1.0.0"/>
     </requires>
@@ -13,8 +10,11 @@
                library_windx="game.libretro.scummvm.dll"
                library_wingl="game.libretro.scummvm.dll">
         <platforms></platforms>
-        <extensions></extensions>
+        <extensions>scummvm|scum</extensions>
         <supports_vfs>false</supports_vfs>
+        <supports_game_loop>true</supports_game_loop>
+        <supports_standalone>true</supports_standalone>
+        <supports_keyboard>true</supports_keyboard>
     </extension>
     <extension point="xbmc.addon.metadata">
       <summary lang="en">ScummVM v1.6.0</summary>
