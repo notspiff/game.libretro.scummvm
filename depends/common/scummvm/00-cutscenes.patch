@@ -1,12 +1,13 @@
 diff -Naur a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
 --- a/backends/platform/libretro/build/Makefile
 +++ b/backends/platform/libretro/build/Makefile
-@@ -164,6 +164,10 @@ DEPDIR        = .deps
+@@ -164,6 +164,11 @@ DEPDIR        = .deps
  HAVE_GCC3     = true
  USE_RGB_COLOR = true
  
 +# Add support for cutscenes
 +# See https://github.com/libretro/scummvm/issues/12
++USE_ZLIB = 1
 +DEFINES += -DUSE_ZLIB
 +
  OBJS := $(retrodir)/libretro.o \
