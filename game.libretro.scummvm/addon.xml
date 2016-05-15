@@ -17,12 +17,11 @@
         <supports_keyboard>true</supports_keyboard>
     </extension>
     <extension point="xbmc.addon.metadata">
-      <summary lang="en">ScummVM v1.6.0</summary>
-      <description>ScummVM is a collection of game engine recreations. Originally designed to play LucasArts adventure games that use the SCUMM system, it now also supports a variety of non-SCUMM games by companies like Revolution Software and Adventure Soft.
+      <summary lang="en">ScummVM v1.8.0</summary>
+      <description>ScummVM is a collection of game engine recreations. ScummVM emulates several systems, including the SCUMM system for LucasArts adventure games.
 
-Icon credit: HarryBana (harrybana.deviantart.com)
-
-License: GPLv2</description>
+Icon credit: HarryBana (harrybana.deviantart.com)</description>
+      <license>GPL v2.0</license>
       <platform>all</platform>
       <nofanart>true</nofanart>
     </extension>
