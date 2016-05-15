@@ -8,7 +8,7 @@ enable_language(CXX)
 include(ExternalProject)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-  set(LIBRETRO_DEBUG debug=1)
+  set(LIBRETRO_DEBUG DEBUG=1)
 endif()
 
 if("${CORE_SYSTEM_NAME}" STREQUAL "windows")
