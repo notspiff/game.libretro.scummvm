@@ -6,7 +6,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 enable_language(CXX)
 
-find_package(kodi REQUIRED)
+find_package(Kodi REQUIRED)
 find_package(libretro-scummvm REQUIRED)
 
 set(SCUMMVM_CUSTOM_BINARY ${SCUMMVM_LIB}
