@@ -4,11 +4,7 @@
         <import addon="game.libretro" version="1.0.0"/>
     </requires>
     <extension point="kodi.gameclient"
-               library_android="libgame.libretro.scummvm.so"
-               library_linux="game.libretro.scummvm.so"
-               library_osx="game.libretro.scummvm.dylib"
-               library_windx="game.libretro.scummvm.dll"
-               library_wingl="game.libretro.scummvm.dll">
+               library_@PLATFORM@="@LIBRARY_FILENAME@">
         <platforms></platforms>
         <extensions>scummvm|scum</extensions>
         <supports_vfs>false</supports_vfs>
@@ -21,7 +17,7 @@
 
 Icon credit: HarryBana (harrybana.deviantart.com)</description>
       <license>GPL v2.0</license>
-      <platform>all</platform>
+      <platform>@PLATFORM@</platform>
       <nofanart>true</nofanart>
     </extension>
 </addon>
