@@ -1,4 +1,5 @@
-diff -Naur a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
+diff --git a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
+index 664d1e4..caccb82 100644
 --- a/backends/platform/libretro/build/Makefile
 +++ b/backends/platform/libretro/build/Makefile
 @@ -164,6 +164,11 @@ DEPDIR        = .deps
@@ -12,4 +13,4 @@ diff -Naur a/backends/platform/libretro/build/Makefile b/backends/platform/libre
 +
  OBJS := $(retrodir)/libretro.o \
          $(retrodir)/os.o \
-                  $(srcdir)/$(LIBRETROCOMMON_DIR)/libco/libco.o
+ 		  $(srcdir)/$(LIBRETROCOMMON_DIR)/libco/libco.o
