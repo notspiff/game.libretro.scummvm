@@ -12,7 +12,6 @@
         <platforms></platforms>
         <extensions>scummvm|scum</extensions>
         <supports_vfs>false</supports_vfs>
-        <supports_game_loop>true</supports_game_loop>
         <supports_standalone>true</supports_standalone>
         <supports_keyboard>true</supports_keyboard>
     </extension>
