@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buttonmap>
+	<controller id="game.controller.mouse" type="mouse">
+		<feature name="left" mapto="leftmouse"/>
+		<feature name="right" mapto="rightmouse"/>
+		<feature name="middle" mapto="middle"/>
+		<feature name="wheelup" mapto="wheelup"/>
+		<feature name="wheeldown" mapto="wheeldown"/>
+		<feature name="pointer" mapto="relpointer"/>
+	</controller>
+</buttonmap>
