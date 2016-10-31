@@ -1,0 +1,108 @@
+diff --git a/backends/platform/libretro/libretro.cpp b/backends/platform/libretro/libretro.cpp
+index eeececd..1bb2e45 100644
+--- a/backends/platform/libretro/libretro.cpp
++++ b/backends/platform/libretro/libretro.cpp
+@@ -17,6 +17,12 @@
+ #include <libgen.h>
+ #include <string.h>
+ 
++#if defined(_WIN32)
++#define SLASH_CHAR '\\'
++#else
++#define SLASH_CHAR '/'
++#endif
++
+ retro_log_printf_t log_cb = NULL;
+ static retro_video_refresh_t video_cb = NULL;
+ static retro_audio_sample_batch_t audio_batch_cb = NULL;
+@@ -264,6 +270,21 @@ bool retro_load_game(const struct retro_game_info *game)
+       retroSetSystemDir(".");
+    }
+ 
++   Common::String engineDataDir("engine-data");
++   Common::String engineDataFile = engineDataDir + SLASH_CHAR + "access.dat";
++   struct retro_resource res = { engineDataFile.c_str() };
++   if(environ_cb(RETRO_ENVIRONMENT_GET_RESOURCE_DIRECTORY, &res))
++   {
++      engineDataDir = Common::String(res.base_directory) + SLASH_CHAR + engineDataDir;
++      retroSetEngineDataDir(engineDataDir.c_str());
++   }
++   else
++   {
++      if (log_cb)
++         log_cb(RETRO_LOG_WARN, "No engine-data directory specified, using current directory.\n");
++      retroSetEngineDataDir(".");
++   }
++
+    if(!emuThread && !mainThread)
+    {
+       mainThread = co_active();
+diff --git a/backends/platform/libretro/libretro.h b/backends/platform/libretro/libretro.h
+index 16c274a..2ab79e5 100755
+--- a/backends/platform/libretro/libretro.h
++++ b/backends/platform/libretro/libretro.h
+@@ -852,6 +852,19 @@ enum retro_mod
+                                             * It can be used by the core for localization purposes.
+                                             */
+ 
++struct retro_resource
++{
++   const char *rel_path;
++   const char *base_directory;
++};
++
++#define RETRO_ENVIRONMENT_GET_RESOURCE_DIRECTORY 99
++                                           /* struct retro_resource * --
++                                            * Interface to acquire resource paths by a relative filename.
++                                            * 'rel_path' should be set to a filename relative to the system directory.
++                                            * 'base_directory' will be set to the base path containing the resource or NULL if unknown.
++                                            */
++
+ #define RETRO_MEMDESC_CONST     (1 << 0)   /* The frontend will never change this memory area once retro_load_game has returned. */
+ #define RETRO_MEMDESC_BIGENDIAN (1 << 1)   /* The memory area contains big endian data. Default is little endian. */
+ #define RETRO_MEMDESC_ALIGN_2   (1 << 16)  /* All memory access in this area is aligned to their own size, or 2, whichever is smaller. */
+diff --git a/backends/platform/libretro/os.cpp b/backends/platform/libretro/os.cpp
+index 7beb89f..a0f03c1 100644
+--- a/backends/platform/libretro/os.cpp
++++ b/backends/platform/libretro/os.cpp
+@@ -245,6 +245,7 @@ static INLINE void copyRectToSurface(uint8_t *pixels, int out_pitch, const uint8
+ }
+ 
+ static Common::String s_systemDir;
++static Common::String s_engineDataDir;
+ 
+ #ifdef FRONTEND_SUPPORTS_RGB565
+ #define SURF_BPP 2
+@@ -665,7 +666,7 @@ class OSystem_RETRO : public EventsBaseBackend, public PaletteManager {
+ 
+       virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority = 0)
+       {
+-         // TODO: NOTHING?
++         s.add("engine-data", new Common::FSDirectory(s_engineDataDir), priority);
+       }
+ 
+       virtual void getTimeAndDate(TimeDate &t) const
+@@ -1022,6 +1023,11 @@ void retroSetSystemDir(const char* aPath)
+    s_systemDir = Common::String(aPath ? aPath : ".");
+ }
+ 
++void retroSetEngineDataDir(const char* aPath)
++{
++   s_engineDataDir = Common::String(aPath ? aPath : ".");
++}
++
+ void retroKeyEvent(bool down, unsigned keycode, uint32_t character, uint16_t key_modifiers)
+ {
+    ((OSystem_RETRO*)g_system)->processKeyEvent(down, keycode, character, key_modifiers);
+diff --git a/backends/platform/libretro/os.h b/backends/platform/libretro/os.h
+index 07ee3e9..d7ee76f 100644
+--- a/backends/platform/libretro/os.h
++++ b/backends/platform/libretro/os.h
+@@ -49,6 +49,7 @@ void retroProcessMouse(retro_input_state_t aCallback);
+ void retroPostQuit();
+ 
+ void retroSetSystemDir(const char* aPath);
++void retroSetEngineDataDir(const char* aPath);
+ 
+ void retroKeyEvent(bool down, unsigned keycode, uint32_t character, uint16_t key_modifiers);
+ 
