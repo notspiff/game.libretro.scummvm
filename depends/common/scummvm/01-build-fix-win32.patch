@@ -1,13 +1,13 @@
 diff --git a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
-index 664d1e4..3792eb9 100644
+index 61dde20..d8bd826 100644
 --- a/backends/platform/libretro/build/Makefile
 +++ b/backends/platform/libretro/build/Makefile
-@@ -127,7 +127,7 @@ else ifneq (,$(findstring hardfloat,$(platform)))
- endif
-    DEFINES += -DARM
+@@ -135,7 +135,7 @@ else ifeq ($(platform), emscripten)
+ 	STATIC_LINKING = 1
+ 
  else
 -	CC = gcc
-+	CC = gcc -include bfd.h
++	CC = gcc -include bfd
     TARGET  := $(TARGET_NAME)_libretro.dll
     LDFLAGS += -shared -static-libgcc -static-libstdc++ -s -Wl,--version-script=../link.T
  endif
