@@ -1,5 +1,20 @@
+From 1b09ff5a5f0d9a1482e97566419611350c642ec5 Mon Sep 17 00:00:00 2001
+From: Christian Fetzer <fetzer.ch@gmail.com>
+Date: Sun, 13 Nov 2016 12:10:58 +0100
+Subject: scummvm: Add ability to load resources from multiple
+ directories
+
+Implement RETRO_ENVIRONMENT_GET_RESOURCE_DIRECTORY to support multiple
+directories where engine-data files are read from.
+---
+ backends/platform/libretro/libretro.cpp | 21 +++++++++++++++++++++
+ backends/platform/libretro/libretro.h   | 13 +++++++++++++
+ backends/platform/libretro/os.cpp       |  8 +++++++-
+ backends/platform/libretro/os.h         |  1 +
+ 4 files changed, 42 insertions(+), 1 deletion(-)
+
 diff --git a/backends/platform/libretro/libretro.cpp b/backends/platform/libretro/libretro.cpp
-index eeececd..1bb2e45 100644
+index e3fce5c..d8e32c5 100644
 --- a/backends/platform/libretro/libretro.cpp
 +++ b/backends/platform/libretro/libretro.cpp
 @@ -17,6 +17,12 @@
@@ -15,8 +30,8 @@ index eeececd..1bb2e45 100644
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
  static retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -264,6 +270,21 @@ bool retro_load_game(const struct retro_game_info *game)
-       retroSetSystemDir(".");
+@@ -274,6 +280,21 @@ bool retro_load_game(const struct retro_game_info *game)
+       retroSetSaveDir(".");
     }
  
 +   Common::String engineDataDir("engine-data");
@@ -62,18 +77,18 @@ index 16c274a..2ab79e5 100755
  #define RETRO_MEMDESC_BIGENDIAN (1 << 1)   /* The memory area contains big endian data. Default is little endian. */
  #define RETRO_MEMDESC_ALIGN_2   (1 << 16)  /* All memory access in this area is aligned to their own size, or 2, whichever is smaller. */
 diff --git a/backends/platform/libretro/os.cpp b/backends/platform/libretro/os.cpp
-index 7beb89f..a0f03c1 100644
+index d9cfdf4..9a336af 100644
 --- a/backends/platform/libretro/os.cpp
 +++ b/backends/platform/libretro/os.cpp
-@@ -245,6 +245,7 @@ static INLINE void copyRectToSurface(uint8_t *pixels, int out_pitch, const uint8
- }
+@@ -246,6 +246,7 @@ static INLINE void copyRectToSurface(uint8_t *pixels, int out_pitch, const uint8
  
  static Common::String s_systemDir;
+ static Common::String s_saveDir;
 +static Common::String s_engineDataDir;
  
  #ifdef FRONTEND_SUPPORTS_RGB565
  #define SURF_BPP 2
-@@ -665,7 +666,7 @@ class OSystem_RETRO : public EventsBaseBackend, public PaletteManager {
+@@ -669,7 +670,7 @@ class OSystem_RETRO : public EventsBaseBackend, public PaletteManager {
  
        virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority = 0)
        {
@@ -82,8 +97,8 @@ index 7beb89f..a0f03c1 100644
        }
  
        virtual void getTimeAndDate(TimeDate &t) const
-@@ -1022,6 +1023,11 @@ void retroSetSystemDir(const char* aPath)
-    s_systemDir = Common::String(aPath ? aPath : ".");
+@@ -1031,6 +1032,11 @@ void retroSetSaveDir(const char* aPath)
+    s_saveDir = Common::String(aPath ? aPath : ".");
  }
  
 +void retroSetEngineDataDir(const char* aPath)
@@ -95,14 +110,17 @@ index 7beb89f..a0f03c1 100644
  {
     ((OSystem_RETRO*)g_system)->processKeyEvent(down, keycode, character, key_modifiers);
 diff --git a/backends/platform/libretro/os.h b/backends/platform/libretro/os.h
-index 07ee3e9..d7ee76f 100644
+index ed54090..2062204 100644
 --- a/backends/platform/libretro/os.h
 +++ b/backends/platform/libretro/os.h
-@@ -49,6 +49,7 @@ void retroProcessMouse(retro_input_state_t aCallback);
- void retroPostQuit();
+@@ -50,6 +50,7 @@ void retroPostQuit();
  
  void retroSetSystemDir(const char* aPath);
+ void retroSetSaveDir(const char* aPath);
 +void retroSetEngineDataDir(const char* aPath);
  
  void retroKeyEvent(bool down, unsigned keycode, uint32_t character, uint16_t key_modifiers);
  
+-- 
+2.10.0
+
