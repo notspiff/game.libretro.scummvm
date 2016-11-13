@@ -1,0 +1,51 @@
+From f2816349193ea701c47a2ffd14471e47de181b44 Mon Sep 17 00:00:00 2001
+From: Christian Fetzer <fetzer.ch@gmail.com>
+Date: Sun, 13 Nov 2016 16:08:43 +0100
+Subject: scummvm: Fix filesystem dialogs on windows
+
+Windows needs to use WindowsFileSystemFactory, otherwise file dialogs
+won't work correctly and games cannot be added.
+---
+ backends/platform/libretro/build/Makefile | 6 +++++-
+ backends/platform/libretro/os.cpp         | 5 +++++
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
+index 61dde20..98f2984 100644
+--- a/backends/platform/libretro/build/Makefile
++++ b/backends/platform/libretro/build/Makefile
+@@ -175,8 +175,12 @@ DEPDIR        = .deps
+ HAVE_GCC3     = true
+ USE_RGB_COLOR = true
+ 
++# Compile platform specific parts (e.g. filesystem)
++ifeq ($(platform), win)
++WIN32 = 1
++else
+ POSIX = 1
+-DEFINES += -DFS_TYPE_POSIX
++endif
+ 
+ BACKEND := libretro
+ 
+diff --git a/backends/platform/libretro/os.cpp b/backends/platform/libretro/os.cpp
+index 7beb89f..035f245 100644
+--- a/backends/platform/libretro/os.cpp
++++ b/backends/platform/libretro/os.cpp
+@@ -34,8 +34,13 @@
+ #include "common/events.h"
+ #include "audio/mixer_intern.h"
+ 
++#if defined(_WIN32)
++#include "backends/fs/windows/windows-fs-factory.h"
++#define FS_SYSTEM_FACTORY WindowsFilesystemFactory
++#else
+ #include "backends/fs/posix/posix-fs-factory.h"
+ #define FS_SYSTEM_FACTORY POSIXFilesystemFactory
++#endif
+ 
+ #include "backends/timer/default/default-timer.h"
+ #include "graphics/colormasks.h"
+-- 
+2.10.0
+
