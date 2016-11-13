@@ -1,0 +1,27 @@
+From c77c4678631da286d303d8d1b7401fdd42d245b8 Mon Sep 17 00:00:00 2001
+From: Christian Fetzer <fetzer.ch@gmail.com>
+Date: Sun, 13 Nov 2016 12:06:56 +0100
+Subject: scummvm: Fix compilation on win32
+
+This patch fixes compile error caused by non existing define to INLINE.
+Possibly caused by different upstream mingw/msys version.
+---
+ backends/platform/libretro/build/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/backends/platform/libretro/build/Makefile b/backends/platform/libretro/build/Makefile
+index 6b933d0..5d94b20 100644
+--- a/backends/platform/libretro/build/Makefile
++++ b/backends/platform/libretro/build/Makefile
+@@ -136,7 +136,7 @@ else ifeq ($(platform), emscripten)
+ 	STATIC_LINKING = 1
+ 
+ else
+-	CC = gcc
++	CC = gcc -include bfd.h
+    TARGET  := $(TARGET_NAME)_libretro.dll
+    LDFLAGS += -shared -static-libgcc -static-libstdc++ -s -Wl,--version-script=../link.T
+ endif
+-- 
+2.10.0
+
