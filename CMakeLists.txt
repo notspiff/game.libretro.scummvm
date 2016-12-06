@@ -7,6 +7,6 @@ find_package(Kodi REQUIRED)
 find_package(libretro-scummvm REQUIRED)
 
 set(SCUMMVM_CUSTOM_BINARY ${SCUMMVM_LIB}
-                          ${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
+    ${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 build_addon(${PROJECT_NAME} SCUMMVM "")

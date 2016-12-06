@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="game.libretro.scummvm" name="ScummVM" version="1.9.0" provider-name="Libretro">
-    <requires>
-        <import addon="game.libretro" version="1.0.0"/>
-    </requires>
-    <extension point="kodi.gameclient"
-               library_@PLATFORM@="@LIBRARY_FILENAME@">
-        <platforms></platforms>
-        <extensions>scummvm|scum</extensions>
-        <supports_vfs>false</supports_vfs>
-        <supports_standalone>true</supports_standalone>
-        <supports_keyboard>true</supports_keyboard>
-        <supports_mouse>true</supports_mouse>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-      <summary lang="en">ScummVM v1.9.0</summary>
-      <description>ScummVM is a collection of game engine recreations. ScummVM emulates several systems, including the SCUMM system for LucasArts adventure games.
+<addon id="game.libretro.scummvm"
+		name="ScummVM"
+		version="1.8.1"
+		provider-name="Libretro">
+	<requires>
+		<import addon="game.libretro" version="1.0.0"/>
+	</requires>
+	<extension point="kodi.gameclient"
+			library_@PLATFORM@="@LIBRARY_FILENAME@">
+		<platforms></platforms>
+		<extensions>exe|scum|scummvm</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>true</supports_standalone>
+		<supports_keyboard>true</supports_keyboard>
+		<supports_mouse>true</supports_mouse>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">ScummVM 1.8.1</summary>
+		<description>ScummVM is a collection of game engine recreations. ScummVM emulates several systems, including the SCUMM system for LucasArts adventure games.
 
-Icon credit: HarryBana (harrybana.deviantart.com)</description>
-      <license>GPL v2.0</license>
-      <platform>@PLATFORM@</platform>
-      <nofanart>true</nofanart>
-    </extension>
+Icon credit: HarryBana (harrybana.deviantart.com)
+
+Supported files: .exe, .scum, .scummvm</description>
+		<license>GPLv2</license>
+		<platform>@PLATFORM@</platform>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
 </addon>
