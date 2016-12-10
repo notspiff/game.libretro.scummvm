@@ -25,7 +25,7 @@ Supported files: .exe, .scum, .scummvm</description>
 		<license>GPLv2</license>
 		<platform>@PLATFORM@</platform>
 		<assets>
-			<icon>icon.png</icon>
+			<icon>resources/icon.png</icon>
 		</assets>
 	</extension>
 </addon>
