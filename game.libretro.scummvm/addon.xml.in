@@ -19,8 +19,6 @@
 		<summary lang="en">ScummVM 1.8.1 af70703f</summary>
 		<description>ScummVM is a collection of game engine recreations. ScummVM emulates several systems, including the SCUMM system for LucasArts adventure games.
 
-Icon credit: HarryBana (harrybana.deviantart.com)
-
 Supported files: .exe, .scum, .scummvm</description>
 		<license>GPLv2</license>
 		<platform>@PLATFORM@</platform>
