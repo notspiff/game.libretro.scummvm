@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="game.libretro.scummvm"
 		name="ScummVM"
-		version="1.8.1"
+		version="1.9.0"
 		provider-name="Libretro">
 	<requires>
 		<import addon="game.libretro" version="1.0.0"/>
@@ -16,7 +16,7 @@
 		<supports_mouse>true</supports_mouse>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en">ScummVM 1.8.1 af70703f</summary>
+		<summary lang="en">ScummVM 1.9.0</summary>
 		<description>ScummVM is a collection of game engine recreations. ScummVM emulates several systems, including the SCUMM system for LucasArts adventure games.
 
 Supported files: .exe, .scum, .scummvm</description>
