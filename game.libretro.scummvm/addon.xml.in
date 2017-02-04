@@ -24,7 +24,7 @@ Supported files: .exe, .scum, .scummvm</description>
 		<platform>@PLATFORM@</platform>
 		<assets>
 			<icon>resources/icon.png</icon>
-			<fanart>resources/fanart.png</fanart>
+			<fanart>resources/fanart.jpg</fanart>
 			<screenshot>resources/screenshot-01.jpg</screenshot>
 			<screenshot>resources/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshot-03.jpg</screenshot>
